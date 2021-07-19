@@ -253,3 +253,15 @@ def create_ns(request, ns_arg, **params):
     LOG.debug("create_ns(): ns_arg=%s", str(ns_arg))
     ns_instance = tackerclient(request).create_ns(body=ns_arg)
     return ns_instance
+
+@profiler.trace
+def healing_list(request, **params):
+    LOG.debug("healing_list(): params=%s", params)
+    healing = tackerclient(request).list_healings(**params).get('healings')
+    return healing
+
+@profiler.trace
+def create_healing(request, healing_arg, **params):
+    LOG.debug("create_healing(): params=%s", params)
+    healing = tackerclient(request).create_healing(body=healing_arg)
+    return healing
